@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reach Community Rules</title>
+<meta name="description" content="The rules everyone on Reach agrees to. Reach is for the people closest to you.">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#6a4cf5">
+<style>
+  :root { --ink: #1c1b22; --soft: #5d5a6b; --accent: #6a4cf5; --card: #f4f2fb; --bg: #ffffff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #f2f1f7; --soft: #b0adbf; --card: #1d1b26; --bg: #0f0e14; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.5; }
+  header { background: linear-gradient(145deg, #5b3fe6, #7459ff 55%, #9a80ff); color: #fff;
+    padding: max(28px, env(safe-area-inset-top)) 20px 28px; }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; margin-bottom: 18px; }
+  .brand img { width: 32px; height: 32px; border-radius: 8px; }
+  h1 { margin: 0 0 8px; font-size: 30px; letter-spacing: -0.4px; }
+  header p { margin: 0; opacity: 0.9; }
+  main { padding: 24px 20px 48px; }
+  ol { list-style: none; padding: 0; margin: 0 0 24px; }
+  li { background: var(--card); border-radius: 16px; padding: 16px 18px; margin-bottom: 12px; }
+  li strong { display: block; font-size: 17px; margin-bottom: 4px; }
+  li span { color: var(--soft); }
+  h2 { font-size: 20px; margin: 28px 0 8px; }
+  main p { color: var(--soft); margin: 0 0 12px; }
+  a { color: var(--accent); }
+  footer { color: var(--soft); font-size: 13px; margin-top: 32px; }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand"><img src="/apple-touch-icon.png" alt="">Reach</div>
+  <h1 id="title">Community Rules</h1>
+  <p id="lead">Reach is for the people closest to you. To keep it safe, everyone agrees to these rules.</p>
+</div></header>
+<main><div class="wrap">
+  <ol id="rules"></ol>
+  <h2 id="breakTitle">If someone breaks them</h2>
+  <p id="breakText"></p>
+  <h2 id="privacyTitle">Your privacy</h2>
+  <p id="privacyText"></p>
+  <p id="contact"></p>
+  <footer id="updated"></footer>
+</div></main>
+<script>
+(function () {
+  var es = (navigator.language || "").toLowerCase().indexOf("es") === 0;
+  var t = es ? {
+    title: "Normas de la comunidad",
+    lead: "Reach es para las personas más cercanas a ti. Para que siga siendo seguro, todos aceptamos estas normas.",
+    rules: [
+      ["Solo gente que conoces", "Conecta con amigos y familia que conoces de verdad. Reach no es para conocer desconocidos ni para ganar seguidores."],
+      ["Sé amable", "Nada de acoso, intimidación, amenazas ni odio, en chats, grupos, publicaciones, comentarios o stickers."],
+      ["Tolerancia cero con el abuso infantil", "Nunca compartas contenido sexual de menores de 18 años. Expulsamos a quien lo haga y lo denunciamos a las autoridades."],
+      ["Respeta la privacidad", "No compartas fotos, mensajes ni publicaciones privadas de nadie sin su permiso, y nunca imágenes íntimas."],
+      ["Nada de spam, estafas ni nada ilegal", "Nada de ventas, mensajes masivos, fraudes ni contenido que infrinja la ley."],
+      ["13 años o más", "Necesitas tener al menos 13 años para usar Reach."]
+    ],
+    breakTitle: "Si alguien las incumple",
+    breakText: "Bloquéalo y denúncialo desde su chat, un mensaje o una publicación. Las denuncias llegan al equipo de Reach, que puede expulsar a personas de Reach. No toleramos contenido inapropiado ni a personas abusivas.",
+    privacyTitle: "Tu privacidad",
+    privacyText: "Tus mensajes, publicaciones y fotos están cifrados de extremo a extremo: el equipo de Reach no puede verlos. Por eso, al denunciar, eres tú quien elige qué mensajes o publicaciones enviarnos.",
+    contact: "¿Preguntas? Escríbenos a <a href=\"mailto:hello@reachapp-people.com\">hello@reachapp-people.com</a>.",
+    updated: "Versión 1 · noviembre de 2026"
+  } : {
+    title: "Community Rules",
+    lead: "Reach is for the people closest to you. To keep it safe, everyone agrees to these rules.",
+    rules: [
+      ["Only people you know", "Connect with friends and family you actually know. Reach isn't for meeting strangers or growing an audience."],
+      ["Be kind", "No harassment, bullying, threats or hate, in chats, groups, posts, comments or stickers."],
+      ["Zero tolerance for child abuse", "Never share sexual content involving anyone under 18. We remove anyone who does and report them to the authorities."],
+      ["Respect privacy", "Don't share someone's private photos, messages or posts without their permission, and never intimate images."],
+      ["No spam, scams or anything illegal", "No selling, mass messages, fraud, or content that breaks the law."],
+      ["13 or older", "You need to be at least 13 to use Reach."]
+    ],
+    breakTitle: "If someone breaks them",
+    breakText: "Block them, and report them from their chat, a message or a post. Reports go to the Reach team, who can remove people from Reach. There's no tolerance for objectionable content or abusive people.",
+    privacyTitle: "Your privacy",
+    privacyText: "Your messages, posts and photos are end-to-end encrypted: the Reach team can't see them. That's why, when you report someone, you choose which messages or posts to send us.",
+    contact: "Questions? Write to <a href=\"mailto:hello@reachapp-people.com\">hello@reachapp-people.com</a>.",
+    updated: "Version 1 · November 2026"
+  };
+  if (es) document.documentElement.lang = "es";
+  document.title = "Reach · " + t.title;
+  ["title", "lead", "breakTitle", "breakText", "privacyTitle", "privacyText", "updated"].forEach(function (k) {
+    document.getElementById(k).textContent = t[k];
+  });
+  document.getElementById("contact").innerHTML = t.contact;
+  var list = document.getElementById("rules");
+  t.rules.forEach(function (r) {
+    var li = document.createElement("li");
+    var s = document.createElement("strong"); s.textContent = r[0];
+    var d = document.createElement("span"); d.textContent = r[1];
+    li.appendChild(s); li.appendChild(d); list.appendChild(li);
+  });
+})();
+</script>
+</body>
+</html>
