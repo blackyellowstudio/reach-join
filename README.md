@@ -27,3 +27,12 @@ Published from the `blackyellowstudio/reach-join` repository, branch `main`, roo
   shows the JSON, with no redirect.
 
 To update the site, copy this folder's files into that repository and push.
+
+## Banning someone
+`banned.json` lists people removed from Reach, as hashes of their Reach ID (the ID is in
+every report email). Every phone reads it within a few hours and treats them as blocked
+by everyone; their own Reach shows "account suspended".
+
+    printf 'reach-ban-v1:<Reach ID>' | shasum -a 256
+
+Add the hash (lowercase hex) to `banned`, copy the file into the site repository, push.
