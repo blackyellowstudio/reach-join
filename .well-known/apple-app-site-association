@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["4SHU2LK45Y.com.blackyellow.studio.reach"],
+        "components": [
+          { "/": "/connect", "comment": "Invites to connect: QR codes and shared links" },
+          { "/": "/connect/*" }
+        ]
+      }
+    ]
+  }
+}

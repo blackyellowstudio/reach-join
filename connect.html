@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Connect on Reach</title>
+<meta name="description" content="You've been invited to connect on Reach: chats, plans and posts with just your people, private and encrypted.">
+<meta property="og:title" content="Connect with me on Reach">
+<meta property="og:description" content="Tap to accept. Chats, plans and posts with just your people, private and encrypted.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Reach">
+<meta name="apple-itunes-app" content="app-id=6758571466">
+<meta property="og:image" content="https://join.reachapp-people.com/icon.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#6a4cf5">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root {
+    --bg1: #5b3fe6;
+    --bg2: #7459ff;
+    --bg3: #9a80ff;
+    --ink: #ffffff;
+    --soft: rgba(255, 255, 255, 0.78);
+    --card: rgba(255, 255, 255, 0.12);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Rounded", "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: linear-gradient(145deg, var(--bg1), var(--bg2) 55%, var(--bg3));
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+  }
+  main { width: 100%; max-width: 420px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px; letter-spacing: -0.3px; margin-bottom: 32px; }
+  .brand img { width: 36px; height: 36px; border-radius: 9px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18); }
+  .avatar {
+    width: 76px; height: 76px; border-radius: 50%;
+    background: var(--card); border: 2px solid rgba(255, 255, 255, 0.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px; font-weight: 700; margin-bottom: 18px;
+  }
+  h1 { font-size: 30px; line-height: 1.15; margin: 0 0 10px; letter-spacing: -0.5px; }
+  p { color: var(--soft); font-size: 16px; line-height: 1.45; margin: 0 0 28px; }
+  .button {
+    -webkit-tap-highlight-color: transparent;
+    display: block; width: 100%; text-align: center; text-decoration: none;
+    font-size: 17px; font-weight: 600; padding: 16px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .primary { background: #ffffff; color: var(--bg1); box-shadow: 0 6px 20px rgba(30, 10, 120, 0.25); }
+  .button:active { transform: scale(0.98); opacity: 0.9; }
+  .secondary { background: var(--card); color: var(--ink); border: 1px solid rgba(255, 255, 255, 0.35); }
+  .hint { font-size: 14px; text-align: center; margin: 16px 0 0; }
+  .missing h1 { font-size: 24px; }
+</style>
+</head>
+<body>
+<main id="app">
+  <div class="brand"><img src="/apple-touch-icon.png" alt="">Reach</div>
+  <div class="avatar" id="initial" aria-hidden="true">👋</div>
+  <h1 id="title">Someone wants to connect with you on Reach</h1>
+  <p id="lead">Chats, plans and posts with just your people, private and encrypted.</p>
+  <a class="button primary" id="open" href="#">Open in Reach</a>
+  <a class="button secondary" id="get" href="https://apps.apple.com/app/id6758571466">Get Reach on the App Store</a>
+  <p class="hint" id="hint">Just installed it? Go back and tap the invite link again.</p>
+</main>
+<script>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var token = params.get("token");
+    var name = (params.get("n") || "").trim().slice(0, 60);
+    var spanish = (navigator.language || "").toLowerCase().indexOf("es") === 0;
+
+    var text = spanish ? {
+      someone: "Alguien quiere conectar contigo en Reach",
+      named: " quiere conectar contigo en Reach",
+      lead: "Chats, planes y publicaciones solo con tu gente, privados y cifrados.",
+      open: "Abrir en Reach",
+      get: "Descargar Reach en el App Store",
+      hint: "¿Acabas de instalarla? Vuelve y toca otra vez el enlace de la invitación.",
+      missing: "Este enlace de invitación está incompleto",
+      missingLead: "Pide a tu amigo que te lo vuelva a enviar, o que te muestre su código QR en Reach."
+    } : {
+      someone: "Someone wants to connect with you on Reach",
+      named: " wants to connect with you on Reach",
+      lead: "Chats, plans and posts with just your people, private and encrypted.",
+      open: "Open in Reach",
+      get: "Get Reach on the App Store",
+      hint: "Just installed it? Go back and tap the invite link again.",
+      missing: "This invite link is incomplete",
+      missingLead: "Ask your friend to send it again, or to show you their QR code in Reach."
+    };
+    if (spanish) document.documentElement.lang = "es";
+
+    var title = document.getElementById("title");
+    var lead = document.getElementById("lead");
+    var open = document.getElementById("open");
+    document.getElementById("get").textContent = text.get;
+    document.getElementById("hint").textContent = text.hint;
+    open.textContent = text.open;
+
+    // Only the characters a token can have. Anything else is not an invite.
+    if (!token || !/^[A-Za-z0-9_\-]+$/.test(token)) {
+      document.getElementById("app").classList.add("missing");
+      title.textContent = text.missing;
+      lead.textContent = text.missingLead;
+      open.style.display = "none";
+      document.getElementById("hint").style.display = "none";
+      return;
+    }
+
+    // Set as text, never as markup: the name comes from the link.
+    title.textContent = name ? name + text.named : text.someone;
+    if (name) document.getElementById("initial").textContent = name.charAt(0).toUpperCase();
+    document.title = title.textContent;
+    lead.textContent = text.lead;
+    // For anyone who has Reach but whose phone opened this page instead of the app,
+    // such as an older version of Reach, or a link opened inside another app's browser.
+    open.href = "reach://connect?token=" + encodeURIComponent(token);
+  })();
+</script>
+</body>
+</html>
